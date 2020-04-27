@@ -1,35 +1,27 @@
 const initialState = null
 
-export const createMessage = (content) => {
-  return({
-    type: 'CREATEMESSAGE',
-    content
-  })
-}
-
-export const voteMessage = (content) => {
-  return({
-    type: 'VOTEMESSAGE',
-    content
-  })
-}
-
-export const resetMessage = () => {
-  return({
-    type: 'RESETMESSAGE'
-  })
+export const setMessage = (content) => {
+  return async dispatch => {
+    dispatch(
+      {
+        type: 'SET_MESSAGE',
+        content: content.message
+      })
+    setTimeout(() => {
+      dispatch(
+        {
+          type: 'SET_MESSAGE',
+          content: null
+        }
+      )
+    }, content.time*1000)
+  }
 }
 
 const notificationReducer = (state = initialState, action) => {
   switch(action.type){
-  case 'CREATEMESSAGE':
-    return `you created '${action.content}'`
-
-  case 'VOTEMESSAGE':
-    return `you voted '${action.content}'`
-
-  case 'RESETMESSAGE':
-    return initialState
+  case 'SET_MESSAGE':
+    return action.content
 
   default:
     return state
