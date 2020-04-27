@@ -17,7 +17,7 @@ const Anecdote = ({ anecdote, vote }) => (
   </div>
 )
 
-const AnecdoteList = (props) => {
+const AnecdoteList = () => {
 
   const anecdotes = useSelector(state =>
     state.anecdotes.filter((anecdote) => {
